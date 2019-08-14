@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
-# Copyright (C) 2019 Adrian Englhardt <adrian.englhardt@gmail.com>
-# Licensed under the MIT License - https://opensource.org/licenses/MIT
-
 import logging
 import os
 import re
@@ -19,10 +13,8 @@ RANDOM_STATE = 0
 NUM_FEATURES = 5
 SAMPLE_SIZE = 2000
 
-# input_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data", "input", "raw", "dami")
-input_dir = "/home/i40/trittenb/mnt/transfer/input/raw"
-# output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data", "input", "processed", "dami")
-output_dir = f"/home/i40/trittenb/mnt/transfer/input/dami-base-processed-{SAMPLE_SIZE}"
+input_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data", "input", "raw")
+output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "data", "input", "processed", f"dami-base-processed-{SAMPLE_SIZE}")
 file_regex = re.compile('(.*withoutdupl_norm((_\d\d)|_v01|_catremoved)?.arff$)')
 
 def load_file(file_name):

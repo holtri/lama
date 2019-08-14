@@ -71,8 +71,6 @@ function calculate_qm(nnpool, data, labels, model_range, qm)
     return qm.(cms_pools)
 end
 
-fnr(x::ConfusionMatrix) = x.fn / (x.fn + x.tp)
-
 function find_min_feasible_C(data, gamma, solver, c_max = 0.5, c_min = 0.0, iter=10)
     c = (c_max - c_min) / 2
     c_opt = c
