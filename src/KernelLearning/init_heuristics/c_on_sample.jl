@@ -18,6 +18,7 @@ function SVDD.calculate_C(model, strategy::RandomSampleGrid, kernel)
         set_adjust_K!(m, true)
         SVDD.fit!(m, strategy.solver)
         push!(model_range, m)
+        m = deepcopy(m)
     end
 
     idx_pools = (strategy.pools .!= :U)

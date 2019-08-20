@@ -21,7 +21,6 @@ function search_gamma(data, labels, oracle, nn_stability, stability_window,
     add_initial_sample!(nnpool, labels, oracle, nn_stability, initial_n, query_history, gamma_history)
 
     for i in initial_n+1:max_iteration
-        # gamma = find_gamma(nnpool, data, i; max_γ=max_γ, adjusted=adjusted)
         gamma = find_gamma(nnpool, data, nn_stability; max_γ=max_γ, adjusted=adjusted)
 
         K = kernelmatrix(Val(:col), GaussianKernel(gamma), data)
@@ -112,15 +111,4 @@ function find_max_feasible_C(data, gamma, solver, c_max = 1.0, c_min = 0.0, iter
         end
     end
     return c_opt
-end
-
-function next_query(nnpool, model_range::Vector{VanillaSVDD})
-    idx_pools = nnpool.pools .!= :U
-    class_range_U = map(m -> SVDD.classify.(SVDD.predict(m, data[:, .!idx_pools])), model_range)
-    inlier_count = mapreduce(x -> ifelse.(x .== :inlier, 1, 0), (x,y) -> x .+ y, class_range_U);
-    agreement = abs.(0.5 .- inlier_count ./ length(class_range_U));
-    disagreement_idx = findall(agreement .== minimum(agreement))
-    query = StatsBase.sample(disagreement_idx, 1)[1]
-    @show query, minimum(agreement), length(disagreement_idx)
-    return query
 end

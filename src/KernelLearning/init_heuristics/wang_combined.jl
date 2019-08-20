@@ -26,7 +26,7 @@ function SVDD.calculate_gamma(model, strategy::WangCombinedStrategy)
         for C in strategy.C
             try
                 @info("[Gamma Search] Testing C = $C, gamma = $gamma")
-                set_param!(model, Dict(:C => C))
+                set_param!(m, Dict(:C => C))
                 SVDD.fit!(m, strategy.solver)
             catch e
                 @info("[Gamma Search] Fitting failed for C = $C, gamma $gamma.")

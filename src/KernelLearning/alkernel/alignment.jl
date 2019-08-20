@@ -89,35 +89,3 @@ function find_gamma(nnpool::NNPool, data::Array{Float64, 2}, nn_stability; adjus
     res = Optim.optimize(neg_alignment, min_γ, max_γ, abs_tol=0.1)
     return res.minimizer
 end
-
-function sample_alignments(data, labels, p, nn_stability; adjusted=true, n_iter=50, max_γ=30)
-    n_in = trunc(Int, p * sum(labels .== :inlier))
-    n_out = trunc(Int, p * sum(labels .== :outlier))
-
-    @assert n_in > 0 && n_out > 0
-    @debug n_in, n_out
-
-    nnpool = NNPool(data, k=nn_stability)
-    res = Vector{Float64}()
-
-    for i in 1:n_iter
-        nnpool.nn_pools[:Lin] = Dict{Int, Int}()
-        nnpool.nn_pools[:Lout] = Dict{Int, Int}()
-        nnpool.pools .= :U
-
-        lin = StatsBase.sample(findall(labels .== :inlier), n_in, replace=false)
-        lout = StatsBase.sample(findall(labels .== :outlier), n_out, replace=false)
-
-        for id in (lin ∪ lout)
-            add_to_pools!(nnpool, id, labels[id], nn_stability)
-        end
-
-        try
-            gamma = find_gamma(nnpool, data, nn_stability; max_γ=max_γ, adjusted=adjusted)
-            push!(res, gamma)
-        catch ex
-            println(ex)
-        end
-    end
-    return res
-end
