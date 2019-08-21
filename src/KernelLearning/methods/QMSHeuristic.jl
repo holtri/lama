@@ -25,7 +25,7 @@ function find_parameters(method::QMSHeuristic, data, labels, oracle, solver, qm,
     kdtree = KDTree(data; leafsize = k + 1)
     nn = knn(kdtree, data, k + 1, true)
 
-    S_K = [1/k * sum(nn[1][i][2:end]) for i in 1:size(data, 2)]
+    S_K = [1/k * sum(nn[2][i][2:end]) for i in 1:size(data, 2)]
 
     order = sortperm(S_K)
 
