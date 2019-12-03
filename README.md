@@ -63,7 +63,7 @@ Running the benchmark is compute intensive and takes many CPU hours.
 Therefore, we also provide the [results to download](https://www.ipd.kit.edu/mitarbeiter/lama/output.zip) (51 MB).
 This allows to analyze the results in the notebooks without having to run the whole pipeline.
 
-The code is licensed under a [MIT License](https://github.com/kit-dbis/ocal-evaluation/blob/master/LICENSE.md) and the result data under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
+The code is licensed under a [MIT License](https://github.com/holtri/lama/blob/master/LICENSE.md) and the result data under a [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 If you use this code or data set in your scientific work, please reference the companion paper.
 
 ## Experiment Pipeline
