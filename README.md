@@ -104,7 +104,7 @@ A worker takes one specific configuration, runs the active learning experiment, 
   * **Input:** Generated experiments from step 2.
   * **Execution:**
   ```bash
-     $ julia --project="." run_experiments.jl /full/path/to/ocal-evaluation/scripts/config.jl
+     $ julia --project="." run_experiments.jl /full/path/to/lama/config/config.jl
   ```
   * **Output:** The output files are named by the experiment hash
     * Experiment log (e.g., `data/output/evaluation-AL/results/log/476519099826377054.log`)
